@@ -2,90 +2,66 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <title>Discord Login Demo</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #7289da, #99aab5);
-      text-align: center;
-      margin-top: 50px;
-      color: #fff;
-    }
-    h1 {
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #2c2f33;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #23272a;
-    }
-    img {
-      border-radius: 50%;
-      margin-top: 20px;
-    }
-    #username {
-      margin-top: 10px;
-      font-size: 20px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TomKPlays Website</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div class="sidebar">
+  <!-- Profil oben in der Mitte -->
+  <div class="profile">
+    <img id="profile-pic" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Profilbild">
+    <p id="profile-name">Gast</p>
+  </div>
 
-<h1>Login mit Discord</h1>
-<button onclick="loginDiscord()">Mit Discord anmelden</button>
+  <!-- Navigation -->
+  <nav class="nav-links">
+    <a href="#" class="active">Startseite</a>
+    <a href="#">Shop</a>
+    <a href="#">Programme</a>
+    <a href="#">Links</a>
+  </nav>
 
-<div id="userInfo" style="display:none;">
-  <img id="avatar" width="100" height="100">
-  <div id="username"></div>
+  <!-- Login Buttons -->
+  <div class="login-buttons">
+    <button id="discord-login">Discord Login</button>
+    <button id="google-login">Google Login</button>
+  </div>
+</div>
+
+<div class="main-content">
+  <h1>Willkommen auf meiner Website!</h1>
+  <p>Hier ist die Startseite.</p>
 </div>
 
 <script>
-  const clientId = "DEINE_APPLICATION_ID_HIER"; // <-- hier deine Discord Application ID einfügen
-  const redirect = "http://localhost";
-  const scope = "identify";
+  const discordButton = document.getElementById('discord-login');
+  const googleButton = document.getElementById('google-login');
+  const profilePic = document.getElementById('profile-pic');
+  const profileName = document.getElementById('profile-name');
 
-  function loginDiscord() {
-    window.location.href =
-            "https://discord.com/oauth2/authorize" +
-            "?response_type=token" +
-            "&client_id=" + clientId +
-            "&scope=" + scope +
-            "&redirect_uri=" + encodeURIComponent(redirect);
-  }
+  // Demo Discord Login
+  discordButton.addEventListener('click', () => {
+    alert('Discord Login simuliert');
+    profilePic.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
+    profileName.textContent = 'DiscordUser#1234';
+  });
 
-  // Token aus URL auslesen
-  window.onload = () => {
-    const hash = window.location.hash;
-    if(hash) {
-      const params = new URLSearchParams(hash.substring(1));
-      const token = params.get("access_token");
-      if(token) {
-        fetch("https://discord.com/api/users/@me", {
-          headers: {
-            "Authorization": "Bearer " + token
-          }
-        })
-                .then(res => res.json())
-                .then(data => {
-                  document.getElementById("userInfo").style.display = "block";
-                  document.getElementById("avatar").src = `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png`;
-                  document.getElementById("username").textContent = data.username + "#" + data.discriminator;
-                })
-                .catch(err => {
-                  alert("Fehler beim Abrufen der Daten: " + err);
-                });
-      }
-    }
-  };
+  // Demo Google Login
+  googleButton.addEventListener('click', () => {
+    alert('Google Login simuliert');
+    profilePic.src = 'https://www.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png';
+    profileName.textContent = 'GoogleUser';
+  });
+
+  // Navigation Links aktivieren
+  const navLinks = document.querySelectorAll('.nav-links a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.forEach(l => l.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
 </script>
-
 </body>
 </html>
