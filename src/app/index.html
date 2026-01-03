@@ -3,27 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <title>Discord Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!-- LOGIN BUTTON CONTAINER -->
 <div id="login-container" class="centered">
     <button id="login-btn">Login mit Discord</button>
 </div>
 
+<!-- MAIN CONTENT NACH LOGIN -->
+<div id="main-container" class="hidden">
+    <div class="sidebar">
+        <img id="avatar" src="" alt="Avatar">
+        <p id="username"></p>
+        <button id="logout-btn">Logout</button>
+    </div>
+    <div class="main-content">
+        <h1>Willkommen!</h1>
+        <p>Hier ist dein Content nach Login.</p>
+    </div>
+</div>
+
 <script>
     const loginBtn = document.getElementById("login-btn");
+    const loginContainer = document.getElementById("login-container");
+    const mainContainer = document.getElementById("main-container");
+    const avatarImg = document.getElementById("avatar");
+    const usernameP = document.getElementById("username");
+    const logoutBtn = document.getElementById("logout-btn");
 
+    // Login Button klick
     loginBtn.addEventListener("click", () => {
-        // Discord OAuth Login-Link
-        const clientId = "1433117504170889317"; // hier eintragen
-        const redirectUri = encodeURIComponent("https://nextjs-website-ruddy-omega.vercel.app/"); // z.B. http://localhost:5500/callback.html
+        // Discord OAuth-Link
+        const clientId = "DEINE_CLIENT_ID"; // Discord Client ID
+        const redirectUri = encodeURIComponent("DEINE_REDIRECT_URI"); // z.B. http://localhost/callback
         const scope = encodeURIComponent("identify email guilds");
-
         const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
 
-        // Weiterleitung zur Discord-Anmeldung
-        window.location.href = oauthUrl;
+        window.location.href = oauthUrl; // Weiterleitung zu Discord
+    });
+
+    // Nach Login: ?code=XYZ in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get("code");
+
+    if (code) {
+        // ⚡ Hier ersetzt du durch echte Backend-Daten
+        const discordUser = {
+            name: "MaxMustermann", // später vom Backend ersetzen
+            avatar: "https://cdn.discordapp.com/avatars/123456789012345678/abcdef1234567890.png"
+        };
+
+        avatarImg.src = discordUser.avatar;
+        usernameP.textContent = discordUser.name;
+
+        // Login Button ausblenden, Main Container einblenden
+        loginContainer.style.display = "none";
+        mainContainer.classList.remove("hidden");
+    }
+
+    // Logout Button
+    logoutBtn.addEventListener("click", () => {
+        window.location.href = "/"; // Seite neu laden
     });
 </script>
 </body>

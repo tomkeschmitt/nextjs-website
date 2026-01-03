@@ -1,29 +1,89 @@
+/* Roter Farbverlauf Hintergrund */
 body {
     margin: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     font-family: Arial, sans-serif;
-    /* Roter Farbverlauf von hellrot oben zu dunkelrot unten */
+    height: 100vh;
     background: linear-gradient(to bottom, #ff4d4d, #8b0000);
 }
 
+/* Zentrierter Login Button */
 .centered {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 #login-btn {
-    padding: 15px 30px;
-    font-size: 18px;
+    padding: 20px 40px;
+    font-size: 22px;
     color: white;
-    background-color: #7289da; /* klassisches Discord-Blau */
+    background-color: #7289da; /* Discord Blau */
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.2s;
 }
 
 #login-btn:hover {
     background-color: #5b6eae;
+    transform: scale(1.05);
+}
+
+/* Nach Login */
+.hidden {
+    display: none;
+}
+
+#main-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar links 1/6 */
+.sidebar {
+    width: 16.66%;
+    background-color: #2c2f33;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.3);
+}
+
+.sidebar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.sidebar p {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #ff5555;
+    color: white;
+    transition: background 0.2s;
+}
+
+.sidebar button:hover {
+    background-color: #dd4444;
+}
+
+/* Hauptbereich */
+.main-content {
+    flex: 1;
+    padding: 30px;
+    background-color: #f0f0f0;
+    overflow-y: auto;
 }
