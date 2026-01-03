@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<!-- LOGIN BUTTON CONTAINER -->
+<!-- LOGIN BUTTON -->
 <div id="login-container" class="centered">
     <button id="login-btn">Login mit Discord</button>
 </div>
 
-<!-- MAIN CONTENT NACH LOGIN -->
+<!-- MAIN CONTAINER NACH LOGIN -->
 <div id="main-container" class="hidden">
     <div class="sidebar">
         <img id="avatar" src="" alt="Avatar">
@@ -33,15 +33,13 @@
     const usernameP = document.getElementById("username");
     const logoutBtn = document.getElementById("logout-btn");
 
-    // Login Button klick
+    // Klick auf Login
     loginBtn.addEventListener("click", () => {
-        // Discord OAuth-Link
-        const clientId = "1433117504170889317"; // Discord Client ID
-        const redirectUri = encodeURIComponent("https://nextjs-website-ruddy-omega.vercel.app/"); // z.B. http://localhost/callback
+        const clientId = "1433117504170889317";
+        const redirectUri = encodeURIComponent("https://nextjs-website-ruddy-omega.vercel.app/");
         const scope = encodeURIComponent("identify email guilds");
         const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
-
-        window.location.href = oauthUrl; // Weiterleitung zu Discord
+        window.location.href = oauthUrl;
     });
 
     // Nach Login: ?code=XYZ in URL
@@ -49,21 +47,20 @@
     const code = urlParams.get("code");
 
     if (code) {
-        // ⚡ Hier ersetzt du durch echte Backend-Daten
-        const discordUser = {
-            name: "MaxMustermann", // später vom Backend ersetzen
-            avatar: "https://cdn.discordapp.com/avatars/123456789012345678/abcdef1234567890.png"
-        };
-
-        avatarImg.src = discordUser.avatar;
-        usernameP.textContent = discordUser.name;
-
-        // Login Button ausblenden, Main Container einblenden
-        loginContainer.style.display = "none";
-        mainContainer.classList.remove("hidden");
+        // ⚡ Hier muss dein Backend die echten Discord-Daten liefern
+        fetch(`/get-discord-user?code=${code}`)
+            .then(res => res.json())
+            .then(discordUser => {
+                avatarImg.src = discordUser.avatar;
+                usernameP.textContent = discordUser.username; // echte Daten, kein Dummy
+                loginContainer.style.display = "none";
+                mainContainer.classList.remove("hidden");
+            })
+            .catch(err => {
+                console.error("Fehler beim Laden der Discord-Daten:", err);
+            });
     }
 
-    // Logout Button
     logoutBtn.addEventListener("click", () => {
         window.location.href = "/"; // Seite neu laden
     });
