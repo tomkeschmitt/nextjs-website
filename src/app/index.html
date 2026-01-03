@@ -36,8 +36,8 @@
     // Login Button klick
     loginBtn.addEventListener("click", () => {
         // Discord OAuth-Link
-        const clientId = "DEINE_CLIENT_ID"; // Discord Client ID
-        const redirectUri = encodeURIComponent("DEINE_REDIRECT_URI"); // z.B. http://localhost/callback
+        const clientId = "1433117504170889317"; // Discord Client ID
+        const redirectUri = encodeURIComponent("https://nextjs-website-ruddy-omega.vercel.app/"); // z.B. http://localhost/callback
         const scope = encodeURIComponent("identify email guilds");
         const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
 
