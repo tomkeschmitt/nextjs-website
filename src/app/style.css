@@ -1,96 +1,29 @@
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  display: flex;
-  height: 100vh;
-  background: #f0f2f5;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    /* Roter Farbverlauf von hellrot oben zu dunkelrot unten */
+    background: linear-gradient(to bottom, #ff4d4d, #8b0000);
 }
 
-/* Sidebar links = 1/6 der Breite */
-.sidebar {
-  width: 16.66%; /* 1/6 der Seite */
-  background-color: #2f3136;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 20px;
+.centered {
+    text-align: center;
 }
 
-/* Profilbild oben in der Mitte */
-.profile {
-  text-align: center;
-  margin-bottom: 30px;
+#login-btn {
+    padding: 15px 30px;
+    font-size: 18px;
+    color: white;
+    background-color: #7289da; /* klassisches Discord-Blau */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
 }
 
-.profile img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
-
-.profile p {
-  margin: 0;
-  font-weight: bold;
-}
-
-/* Navigation Links */
-.nav-links {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  text-align: center;
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  padding: 12px 0;
-  border-top: 1px solid #40444b;
-}
-
-.nav-links a.active {
-  background-color: #40444b;
-}
-
-/* Login Buttons unten */
-.login-buttons {
-  margin-top: auto;
-  margin-bottom: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.login-buttons button {
-  padding: 8px 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-#discord-login {
-  background-color: #7289da;
-  color: white;
-}
-
-#discord-login:hover {
-  background-color: #5b6eae;
-}
-
-#google-login {
-  background-color: #db4437;
-  color: white;
-}
-
-#google-login:hover {
-  background-color: #c33c30;
-}
-
-/* Hauptinhalt rechts */
-.main-content {
-  flex: 1;
-  padding: 40px;
+#login-btn:hover {
+    background-color: #5b6eae;
 }

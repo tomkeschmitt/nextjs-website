@@ -1,67 +1,30 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TomKPlays Website</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Discord Login</title>
 </head>
 <body>
-<div class="sidebar">
-  <!-- Profil oben in der Mitte -->
-  <div class="profile">
-    <img id="profile-pic" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Profilbild">
-    <p id="profile-name">Gast</p>
-  </div>
-
-  <!-- Navigation -->
-  <nav class="nav-links">
-    <a href="#" class="active">Startseite</a>
-    <a href="#">Shop</a>
-    <a href="#">Programme</a>
-    <a href="#">Links</a>
-  </nav>
-
-  <!-- Login Buttons -->
-  <div class="login-buttons">
-    <button id="discord-login">Discord Login</button>
-    <button id="google-login">Google Login</button>
-  </div>
-</div>
-
-<div class="main-content">
-  <h1>Willkommen auf meiner Website!</h1>
-  <p>Hier ist die Startseite.</p>
+<div id="login-container" class="centered">
+    <button id="login-btn">Login mit Discord</button>
 </div>
 
 <script>
-  const discordButton = document.getElementById('discord-login');
-  const googleButton = document.getElementById('google-login');
-  const profilePic = document.getElementById('profile-pic');
-  const profileName = document.getElementById('profile-name');
+    const loginBtn = document.getElementById("login-btn");
 
-  // Demo Discord Login
-  discordButton.addEventListener('click', () => {
-    alert('Discord Login simuliert');
-    profilePic.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
-    profileName.textContent = 'DiscordUser#1234';
-  });
+    loginBtn.addEventListener("click", () => {
+        // Discord OAuth Login-Link
+        const clientId = "1433117504170889317"; // hier eintragen
+        const redirectUri = encodeURIComponent("https://nextjs-website-ruddy-omega.vercel.app/"); // z.B. http://localhost:5500/callback.html
+        const scope = encodeURIComponent("identify email guilds");
 
-  // Demo Google Login
-  googleButton.addEventListener('click', () => {
-    alert('Google Login simuliert');
-    profilePic.src = 'https://www.gstatic.com/images/branding/product/1x/avatar_circle_blue_512dp.png';
-    profileName.textContent = 'GoogleUser';
-  });
+        const oauthUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=${scope}`;
 
-  // Navigation Links aktivieren
-  const navLinks = document.querySelectorAll('.nav-links a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.forEach(l => l.classList.remove('active'));
-      link.classList.add('active');
+        // Weiterleitung zur Discord-Anmeldung
+        window.location.href = oauthUrl;
     });
-  });
 </script>
 </body>
 </html>
